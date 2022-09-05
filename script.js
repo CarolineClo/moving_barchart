@@ -5,14 +5,29 @@ window.addEventListener("load", innit);
 const queuers = [30, 25, 16, 23, 8, 10, 22, 2, 27, 14, 18, 22, 9, 28, 3, 9, 32, 15, 19, 3, 3, 7, 29, 27, 29, 14, 12, 25, 20, 1, 14, 22, 24, 27, 28, 31, 32, 27, 2, 1];
 
 function innit() {
-  displaydata();
+  getNewQueuers();
+  moveBars();
 }
 
-//function loop();
+function getNewQueuers() {
+  return Math.floor(Math.random() * 32);
+}
 
-//function getNumberOfQueuers();
+//move the bar chart along
+function moveBars() {
+  //get the newest queue size
+  const queueSize = getNewQueuers();
+  console.log(queueSize);
+  //take away the last number
+  newQueuer = queuers.shift();
+  //add a new number to front of queue (end of array)
+  newQueuer = queuers.push(queueSize);
+  console.log(queuers);
+  displayData();
+  // loop();
+}
 
-function displaydata() {
+function displayData() {
   const template = document.querySelector("#bar_template").content;
   const copy = template.cloneNode(true);
   queuers.forEach((queuer) => {
@@ -21,10 +36,9 @@ function displaydata() {
     copy.querySelector(".bar").style.height = queuer + `${"%"}`;
     const parent = document.querySelector("#bar_container");
     parent.appendChild(copy);
-    console.log(queuers);
-    //bar style should be something like height queuers [0]%
   });
 }
 
-//function modifyQueuers();
-//make the array shift along one. unshift [0] and push that number into [40]?
+// function loop() {
+//   setTimeout(innit, 500);
+// }
